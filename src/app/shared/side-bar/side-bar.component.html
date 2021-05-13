@@ -1,0 +1,40 @@
+<nav class="mt-2">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a routerLink="/home" class="brand-link">
+      <img src="../../../assets/images/logo.png" alt="wevioo logo" class="brand-image img-circle elevation-2" style="opacity: .8">
+      <span class="brand-text font-weight-light">Wevioo</span>
+    </a>
+
+    <!-- Sidebar -->
+    <!-- Sidebar Menu -->
+    <div class="sidebar">
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ng-container *ngFor="let route of routes">
+              <li class="nav-item">
+                <a [routerLink]="route?.link" routerLinkActive="active" class="nav-link"> 
+                  <i [ngClass]="['nav-icon', 'fas', route?.icon]"></i>
+                  <p>
+                    {{ route?.label }}
+                  </p>
+                  <i *ngIf="route.children.length > 0" class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                   <ng-container *ngFor="let child of route.children">
+                    <li class="nav-item">
+                      <a [routerLink]="child.link" routerLinkActive="active" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>{{child.label}}</p>
+                      </a>
+                    </li>
+                    </ng-container> 
+                </ul>
+              </li> 
+            </ng-container>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>

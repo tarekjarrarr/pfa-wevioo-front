@@ -1,4 +1,3 @@
-<nav class="mt-2">
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a routerLink="/home" class="brand-link">
@@ -6,35 +5,52 @@
       <span class="brand-text font-weight-light">Wevioo</span>
     </a>
 
-    <!-- Sidebar -->
-    <!-- Sidebar Menu -->
-    <div class="sidebar">
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <ng-container *ngFor="let route of routes">
-              <li class="nav-item">
-                <a [routerLink]="route?.link" routerLinkActive="active" class="nav-link"> 
-                  <i [ngClass]="['nav-icon', 'fas', route?.icon]"></i>
-                  <p>
-                    {{ route?.label }}
-                  </p>
-                  <i *ngIf="route.children.length > 0" class="right fas fa-angle-left"></i>
-                </a>
-                <ul class="nav nav-treeview">
-                   <ng-container *ngFor="let child of route.children">
-                    <li class="nav-item">
-                      <a [routerLink]="child.link" routerLinkActive="active" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>{{child.label}}</p>
-                      </a>
-                    </li>
-                    </ng-container> 
-                </ul>
-              </li> 
-            </ng-container>
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item">
+          <a [routerLink]="'dashboard'" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-home"></i>
+            <p>
+              Dashboard
+            </p>
+          </a>
+        </li>             
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="nav-icon fas fa-building"></i>
+            <p>
+              Entreprises
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="'entreprises/recherche'" routerLinkActive="active" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Recherche</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="'entreprises/recommandation'" routerLinkActive="active" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Recommandation</p>
+              </a>
+            </li>
           </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
-      </div>
-      <!-- /.sidebar -->
-    </aside>
+        </li>
+        
+        <li class="nav-item">
+          <a [routerLink]="'compagnes'" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-briefcase"></i>
+            <p>
+              Compagnes
+            </p>
+          </a>
+        </li>
+        
+      </ul>
+    </nav>  
+    <!-- /.sidebar -->
+  </aside>

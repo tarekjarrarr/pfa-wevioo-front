@@ -1,0 +1,60 @@
+<mat-card>
+    <mat-card-title>
+        {{topic.title}}
+    </mat-card-title>
+    <mat-card-subtitle>	
+        {{topic.description}}
+    </mat-card-subtitle>
+    <mat-card-content>
+        <div class="card card-dark" *ngFor="let companiesItem of topic.companies">
+            <div class="card-header" >       
+             <h3 class="card-title" >
+             {{companiesItem.company.name}} 
+             </h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" (click)="removeCompanyFromTopic(companiesItem.company.id)" >
+                    <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Titre</th>
+                    <th>Date</th>
+                    <th>Ajouté par</th>
+                    <th>Fichier joint</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let ticket of companiesItem.tickets ">
+
+                  <tr>
+                    <td>{{ticket.title}}</td>
+                    <td>{{ticket.date}}</td>
+                    <td>{{ticket.addedBy.name}}</td>
+                    <td>{{ticket.file}}</td>
+                    <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-tool" (click)="removeTicketFromCompany(ticket.id)" >
+                            <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                </tr>
+                </tbody>            
+              </table>
+              <div class="row justify-content-center mb-4 mt-3">
+                <button type="button" color="primary" class="btn btn-tool" (click)="addTicket()" >
+                <i class="fas fa-plus-circle">Ajouter une etiquette</i>
+                </button>
+               </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+    </mat-card-content>
+</mat-card>

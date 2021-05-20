@@ -1,0 +1,23 @@
+<form [formGroup]="formAffect" (ngSubmit)="onSubmit()">
+    <div class="row" style="margin-left:10px;margin-right:20px">
+        <h3>Choisissez le titre de la compagne à la quelle affecter cette entreprise {{data.entreprise.name}}</h3>
+
+        <div class="col col-sm-6">
+            <mat-form-field class="form-group" appearance="fill">
+                <mat-label>Compagnes deja crées</mat-label>
+                <mat-select formControlName="topic">
+                    <mat-option *ngFor="let topic of topics" [value]="topic.id">{{topic.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col ">
+            Ou bien <a (click)="createTopic()" [routerLink]="['/compagnes']" class="nav-link"  >Créer une nouvelle compagne commerciale</a>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <button mat-button (click)="Cancel()">Annuler</button>
+        <button mat-button type="submit"  [mat-dialog-close]="data.topicId" cdkFocusInitial>Confirmer</button>
+    </div>
+</form>

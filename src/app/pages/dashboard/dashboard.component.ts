@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ChartType } from 'chart.js';
 import { MultiDataSet, Label } from 'ng2-charts';
 
@@ -10,7 +11,7 @@ import { MultiDataSet, Label } from 'ng2-charts';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
 
   ngOnInit(): void {
@@ -22,4 +23,15 @@ export class DashboardComponent implements OnInit {
   ];
   public doughnutChartType: ChartType = 'doughnut';
 
+  goSearch(){
+    this.router.navigate(['entreprises/recherche']);
+  }
+
+  goRecommandation(){
+    this.router.navigate(['entreprises/recommandation']);
+  }
+
+  goTopics(){
+    this.router.navigate(['compagnes']);
+  }
 }

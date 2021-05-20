@@ -1,0 +1,60 @@
+<section class="content-header">
+    <div class="container-fluid">
+
+        <div class="row mb-2">
+            <div class="col-sm d-flex align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                    <li class="breadcrumb-item active">Compagnes <b></b></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-auto">
+                <h1 >Gérer vos compagnes</h1>
+                <h3 style="color: #00A3AA;"><b>&nbsp;Créez vos compagnes commerciales et suivez les en temps réel </b></h3>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col col-lg-3 col-md-4 col-sm-6">
+                <div class="row mb-4 justify-content-center">
+                    <button  class="btn btn-outline-info btn-block" style="max-width: fit-content;" (click)="addTopic()"><i class="fas fa-plus-square " ></i> Créer une compagne</button>
+                </div>
+                <div class="card">
+                    <div class="card-header" style="color:#81005C">
+                        <b>Liste des compagnes</b>
+                    </div>
+                    
+                    <mat-accordion >
+                        <mat-expansion-panel *ngFor="let topic of topics" (opened)="showDetails(topic.id)" >
+                          <mat-expansion-panel-header class="bg-gradient-light" >
+                            <mat-panel-title>
+                              {{topic.title}}
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <div class="row">
+                                <b>Crée par &nbsp;</b> {{topic.creator}}
+                          </div>
+                          <div class="row">
+                                <b>Derniere modification &nbsp;</b> {{topic.modified}}
+                          </div>
+                          <div class="row">
+                            <b>Date de creation  &nbsp;</b> {{topic.created}}
+                        </div>  
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                    </div>
+            </div>
+            <div class="col" *ngIf="selectedTopic">
+               <app-details-topic></app-details-topic>
+            </div> 
+        </div>
+    </div>
+</section>
+

@@ -13,7 +13,7 @@
 
     <div class="row mb-2">
       <div class="col-sm-auto">
-        <h1>informations generales</h1>
+        <h1>Informations generales</h1>
       </div>
     </div>
 
@@ -109,18 +109,18 @@
           <div class="card-footer ">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  nombre de recherches effectuées <span class="float-right badge bg-danger">31</span>
+                <a  class="nav-link">
+                  Nombre de recherches effectuées <span class="float-right badge bg-danger">31</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  nombre de compagnes suivies <span class="float-right badge bg-info">5</span>
+                <a class="nav-link">
+                  Nombre de compagnes suivies <span class="float-right badge bg-info">5</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  nombre d'étiquettes crées <span class="float-right badge bg-success">12</span>
+                <a class="nav-link">
+                  Nombre d'étiquettes crées <span class="float-right badge bg-success">12</span>
                 </a>
               </li>
             </ul>
@@ -172,9 +172,9 @@
               <div class="col-12 col-sm-6 col-md-3">
                   <div class="info-box ">
                   <span class="info-box-icon bg-info elevation-1"><i class="fas fa-building"></i></span>
-                  <button class="btn btn-sm " type="button">
+                  <button class="btn btn-sm " type="button" (click)="goSearch()">
                   <div class="info-box-content ">
-                   <span class="info-box-text">rechercher <br> une entreprise</span>
+                   <span class="info-box-text">Rechercher <br> une entreprise</span>
                   </div>
                   </button>
                   </div>  
@@ -183,9 +183,9 @@
               <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
                   <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-project-diagram"></i></span>
-                  <button class="btn btn-sm" type="btn">
+                  <button class="btn btn-sm" type="button" (click)="goRecommandation()">
                   <div class="info-box-content ">
-                    <span class="info-box-text  ">trouver des <br>entreprises similaires</span>
+                    <span class="info-box-text  ">Trouver des <br>entreprises similaires</span>
                   </div>
                   </button>
                 </div>
@@ -196,7 +196,7 @@
                 <div class="info-box mb-3" >
                   <span class="info-box-icon bg-success elevation-1"><a><i class="fas fa-thumbtack"></i></a></span>
     
-                  <button class="btn btn-sm">
+                  <button class="btn btn-sm" type="button" (click)="goTopics()">
                     <div class="info-box-content ">
                       <span class="info-box-text  ">Gérer vos <br>compagnes </span>
                     </div>

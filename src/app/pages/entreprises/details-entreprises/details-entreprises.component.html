@@ -1,0 +1,76 @@
+<section class="content-header">
+    <div class="container-fluid">
+
+        <div class="row mb-2">
+            <div class="col-sm d-flex align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                    <li class="breadcrumb-item active">entreprises / <b>details </b></li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- <div class="row mb-2">
+            <div class="col-sm-auto">
+                <h1>Details d'entreprise </h1>
+            </div>
+        </div> -->
+
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+              <div class="invoice p-3 mb-3">
+                <div class="row " style="height:100px">
+                  <div class="col-12">
+                    <p class="float-right"><b>identifiant </b>  {{entrepriseId}}  </p>
+                    <h1>
+                      <i class="fas fa-globe"></i><b>  {{entreprise.name}}</b> 
+                    </h1>
+                  </div>
+                </div>
+               
+                <div class="row invoice-info mx-auto">
+                  <div class="col-sm-4 invoice-col  ">
+                    <div class="col col-sm-12 mb-2">
+                        <h3> <i class="fas fa-print"></i><b>Type d'entreprise </b></h3> {{entreprise.type}} 
+                    </div>
+                    <div class="col col-sm-12 mb-2">
+                      <h3> <i class="fas fa-print"></i><b>   Secteur d'activité </b></h3>  {{entreprise.industry}}
+                    </div>
+                    <div class="col col-sm-12 mb-2">
+                      <h3> <i class="fas fa-print"></i><b>  Lieu</b> </h3> {{entreprise.location}}
+                    </div>
+                    <div class="col col-sm-12 mb-2">
+                      <h3> <i class="fas fa-print"></i><b>Taille de l'entreprise</b> </h3>  {{entreprise.size}}
+                    </div>
+                    <div class="col col-sm-12 ">
+                      <h3> <i class="fas fa-print"></i><b>Age de l'entreprise</b> </h3> {{entreprise.age}}
+                    </div>
+                  </div>
+                  <div class="col-sm-4 invoice-col">
+                    <h3><b>Description</b> </h3>
+                    <br>
+                    <h3>  {{entreprise.description}}</h3>
+                  </div>
+                </div>
+                
+                <br>
+                <div class=" row example-button-row">
+                  <div class="col offset-sm-8 ">
+                    <button  class="btn btn-outline-info btn-block " style="max-width: fit-content;" (click)="addToTopic()"><i class="fas fa-plus-square "  ></i> Affecter à une compagne commerciale</button>
+                    <button  class="btn btn-outline-success btn-block" style="max-width: fit-content;" (click)="showTopics()"><i class="fas fa-info"   ></i> &nbsp;Lister les compagnes commerciales </button>
+                  </div>
+              </div>
+              </div>
+              
+              
+            </div>
+            <div class="col col-sm-4 mb-3 offset-sm-4">
+              <button  class="btn btn-outline-info btn-block " style="max-width: fit-content;" (click)="showProfiles()"><i class="fas fa-users" ></i> Trouver les profils decideurs</button>
+            </div>
+          </div>
+    </div>
+</section>

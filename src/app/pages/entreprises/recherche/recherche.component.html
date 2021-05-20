@@ -1,0 +1,114 @@
+<section class="content-header">
+    <div class="container-fluid">
+
+        <div class="row mb-2">
+            <div class="col-sm d-flex align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                    <li class="breadcrumb-item active">entreprises / <b>recherche</b></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-auto">
+                <h1>Trouver des entreprises qui repondent à vos critéres</h1>
+                <h3 style="color: #00A3AA;"><b>&nbsp; Decouvrer une repertoire de +6,000 entreprises</b></h3>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="content">   
+    <div class="container-fluid">
+
+
+        <div class="card card-warning">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+
+                <form [formGroup]="formResearch" (ngSubmit)="onSubmit()">
+                    <div class="row " style="margin-left:10px;margin-right:20px">
+                        <div class="col col-sm-5">
+                            <mat-form-field class="form-group" appearance="outline">
+                                <mat-label>Secteur d'activité</mat-label>
+                                <mat-select formControlName="industry">
+                                    <mat-option value="intellignece artificielle">intellignece artificielle</mat-option>
+                                    <mat-option value="services informatiques">services informatiques</mat-option>
+                                    <mat-option value="industries">industries</mat-option>
+                                    <mat-option value="reseau et telecommunication">reseau et telecommunication</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col col-sm-4">
+                            <mat-form-field class="form-group" appearance="outline">
+                                <mat-label>Type de l'entreprise</mat-label>
+                                <mat-select formControlName="type">
+                                    <mat-option value="startup">startup</mat-option>
+                                    <mat-option value="PME">PME</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col col-sm-3">
+                            <mat-form-field class="form-group" appearance="outline">
+                                <mat-label>Taille de l'entreprise</mat-label>
+                                <mat-select formControlName="size">
+                                    <mat-option value="0-10">0 - 10</mat-option>
+                                    <mat-option value="11-50">11 - 50</mat-option>
+                                    <mat-option value="50-100">50 - 100</mat-option>
+                                    <mat-option value=">100">> 100</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col col-sm-4">
+                            <mat-form-field class="form-group" appearance="outline">
+                                <input matInput placeholder="Ex:Tunis" formControlName="location">
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left:10px ;">
+                        <div class="col col-sm-8">
+                            <h3><b>plus de filtres </b> 
+                            <i *ngIf="!clicked" class="right fas fa-angle-right" (click)="this.clicked=!clicked"></i>
+                            <i *ngIf="clicked" class="right fas fa-angle-down" (click)="this.clicked=!clicked"></i>
+                            </h3>
+                            <mat-form-field *ngIf="clicked" class="form-group" appearance="outline" style="width:400px" >
+                                <mat-chip-list #chipList>
+                                    <mat-chip *ngFor="let key of keys" [selectable]="false" 
+                                        removable="true" (removed)="remove(key)">
+                                        {{key}}
+                                        <mat-icon matChipRemove >cancel</mat-icon>
+                                    </mat-chip>
+                                    <input placeholder="insérer un mot clé" #keyInput formControlName="keysCtrl"
+                                        [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                        [matChipInputAddOnBlur]="false" 
+                                        (matChipInputTokenEnd)="add($event)"/>
+                                </mat-chip-list>
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                    <mat-option *ngFor="let key of filteredKeys | async" [value]="key">
+                                        {{key}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col col-sm-2 offset-md-8">
+                            <button type="" [disabled]="!formResearch .touched" (click)="Clear()" class="btn bg-light" >reinitialiser</button>
+                        </div>
+                        <div class="col col-sm-2">
+                            <button type="submit" [disabled]="!formResearch.valid" class="btn" style="background-color:#F7B000">rechercher</button>
+                        </div>
+                       
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <app-resultats *ngIf="result"></app-resultats>
+        
+    </div>
+</section>

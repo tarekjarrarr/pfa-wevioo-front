@@ -1,0 +1,54 @@
+
+    <h2 mat-dialog-title>
+        Les compagnes commerciales auxquelles cette entreprise a été affectée
+    </h2>
+
+
+    <mat-dialog-content>
+        <div class="card card-dark" >
+            <div class="card-header" >       
+             <h3 class="card-title" >
+                <i class="fas fa-globe"></i>  {{data.entreprise.name}} 
+             </h3>
+            </div>
+            <div class="card-body p-0">
+              <table class="table responsive-table">
+                <thead>
+                  <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Crée le</th>
+                    <th>Etiquettes</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let topic of topics ">
+                  <tr>
+                    <td><b>{{topic.title}}</b></td>
+                    <td>{{topic.description}}</td>
+                    <td>{{topic.created}}</td>
+                    <td *ngFor="let ticket of topic.tickets">
+                        <div class="row">
+                            <div class="col">
+                               <b>{{ticket.title}}</b> -{{ticket.date}}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>            
+            </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <div class="row mt-3 justify-content-right">
+        <div class="col col-sm-3 offset-5 ">
+        <button  mat-button cdkFocusInitial (click)="cancel()">Fermer</button>
+        </div>
+        <div class="col col-sm-4">
+        <button style="background-color:#F7B000 " mat-button  (click)="voirTopics()"><i class="fas fa-eye"></i>Consulter toutes les compagnes</button>
+        </div>
+        
+       </div>
+    </mat-dialog-actions>
+

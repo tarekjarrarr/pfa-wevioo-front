@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Ajouter une étiquette</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formTicket" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col col-sm-6">
+                <mat-form-field class="form-group" appearance="fill">
+                    <mat-label>Titre</mat-label>
+                    <input matInput placeholder="Ex:Entretien avec X" formControlName="title">
+                </mat-form-field>
+            </div>
+            <div class="col col-sm-6">
+                <mat-form-field class=" form-group example-form-field" appearance="fill">
+                    <mat-label>Date</mat-label>
+                    <input matInput formControlName="date" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="form-group" appearance="fill">
+            <label for="file">Fichier</label>
+            <input  
+                formControlName="file"
+                id="file" 
+                type="file" 
+                class="form-control"
+                (change)="onFileChange($event)">
+        </div>
+
+        <div>
+            <button mat-button (click)="Cancel()">Annuler</button>
+            <button mat-button type="submit"  [mat-dialog-close]="data" cdkFocusInitial>Confirmer</button>
+        </div>
+</form>
+</div>

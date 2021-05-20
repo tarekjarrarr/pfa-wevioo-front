@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>Créer une compagne commerciale</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formTopic" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col col-sm-6">
+                <mat-form-field class="form-group" appearance="fill">
+                    <mat-label>Titre</mat-label>
+                    <input matInput placeholder="Ex: Vente produit X" formControlName="title">
+                </mat-form-field>
+            </div>
+            <div class="col col-sm-8">
+                <mat-form-field class="form-group" appearance="fill">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput  rows="3" placeholder="Ex: objectif de la compagne .." formControlName="description"></textarea>
+                </mat-form-field>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col col-sm-6">
+                <mat-form-field class=" form-group example-form-field" appearance="fill">
+                    <mat-label>Date de debut</mat-label>
+                    <input matInput formControlName="start" [matDatepicker]="pickerOne">
+                    <mat-datepicker-toggle matSuffix [for]="pickerOne">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #pickerOne></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col col-sm-6">
+                <mat-form-field class=" form-group example-form-field" appearance="fill">
+                    <mat-label>Date de fin</mat-label>
+                    <input matInput formControlName="end" [matDatepicker]="pickerTwo">
+                    <mat-datepicker-toggle matSuffix [for]="pickerTwo">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #pickerTwo></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        
+
+        <div>
+            <button mat-button (click)="Cancel()">Annuler</button>
+            <button mat-button type="submit"  [mat-dialog-close]="data" cdkFocusInitial>Confirmer</button>
+        </div>
+</form>
+</div>

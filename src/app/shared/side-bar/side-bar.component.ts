@@ -12,33 +12,27 @@ export class SideBarComponent implements OnInit {
   routes = [
     {
       label: 'Dashboard',
-      link: '',
+      link: '/dashboard',
       icon: 'fa-home',
       children:[]
     },
     {
       label:'entreprises',
-      link:'/entreprises',
+      link:'#',
       icon:'fa-building',
       children:[{
         label: 'recherche',
-        link: '/entreprise/recherche'
+        link: '/entreprises/recherche'
         },
         {
-        label: 'recommendation',
-        link: '/entreprise/recommendation'
+        label: 'recommandation',
+        link: '/entreprises/recommandation'
         }
       ] 
     },
     {
-      label:'profils',
-      link:'/profils',
-      icon:'fa-user-friends',
-      children:[]
-    },
-    {
       label:'topics',
-      link:'/topics',
+      link:'/compagnes',
       icon:'fa-briefcase',
       children:[]
 

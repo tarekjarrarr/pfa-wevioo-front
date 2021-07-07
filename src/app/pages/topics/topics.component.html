@@ -5,15 +5,15 @@
             <div class="col-sm d-flex align-items-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item active">Compagnes <b></b></li>
+                    <li class="breadcrumb-item active">campagnes <b></b></li>
                 </ol>
             </div>
         </div>
 
         <div class="row mb-2">
             <div class="col-sm-auto">
-                <h1 >Gérer vos compagnes</h1>
-                <h3 style="color: #00A3AA;"><b>&nbsp;Créez vos compagnes commerciales et suivez les en temps réel </b></h3>
+                <h1 >Gérer vos campagnes</h1>
+                <h3 style="color: #00A3AA;"><b>&nbsp;Créez vos campagnes de prospection commerciale et collaborez avec vos collaborateurs en temps réel </b></h3>
             </div>
         </div>
 
@@ -24,29 +24,36 @@
         <div class="row">
             <div class="col col-lg-3 col-md-4 col-sm-6">
                 <div class="row mb-4 justify-content-center">
-                    <button  class="btn btn-outline-info btn-block" style="max-width: fit-content;" (click)="addTopic()"><i class="fas fa-plus-square " ></i> Créer une compagne</button>
+                    <button  class="btn btn-outline-info btn-block" style="max-width: fit-content;" (click)="addTopic()"><i class="fas fa-plus-square " ></i> Créer une campagne</button>
                 </div>
                 <div class="card">
                     <div class="card-header" style="color:#81005C">
-                        <b>Liste des compagnes</b>
+                        <b>Liste des campagnes</b>
                     </div>
                     
                     <mat-accordion >
-                        <mat-expansion-panel *ngFor="let topic of topics" (opened)="showDetails(topic.id)" >
+                        <mat-expansion-panel *ngFor="let topic of topics; trackBy: trackByFn;let i=index" (opened)="showDetails(topic._id)" >
                           <mat-expansion-panel-header class="bg-gradient-light" >
                             <mat-panel-title>
                               {{topic.title}}
                             </mat-panel-title>
                           </mat-expansion-panel-header>
                           <div class="row">
-                                <b>Crée par &nbsp;</b> {{topic.creator}}
+                                <b>Crée par &nbsp;</b> {{topic.creator.fullname}}
                           </div>
-                          <div class="row">
+                          <!-- <div class="row">
                                 <b>Derniere modification &nbsp;</b> {{topic.modified}}
-                          </div>
+                          </div> -->
                           <div class="row">
                             <b>Date de creation  &nbsp;</b> {{topic.created}}
                         </div>  
+                        <div class="row " style="margin-top:4px">
+                            <div class="btn-group btn-group-sm" style="margin-left:85%">
+                                <button type="button" class="btn btn-tool allign-self-right" (click)="removeTopic(topic._id,i)" >
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                              </div>
+                        </div> 
                         </mat-expansion-panel>
                       </mat-accordion>
                     </div>

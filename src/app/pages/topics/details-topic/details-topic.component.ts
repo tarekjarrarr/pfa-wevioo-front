@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { TopicsService } from 'src/app/core/services/topics.service';
 import { AddTicketComponent } from '../add-ticket/add-ticket.component';
 
@@ -19,31 +19,41 @@ export class DetailsTopicComponent implements OnInit {
       this.topicsService.subject.subscribe((e) => this.topic = e );
   }
 
-  removeCompanyFromTopic(id:string){
+  removeCompanyFromTopic(companyIndex,id:string){
     if(confirm("Etes-vous sur de supprimer cet element ? ")) {
-      console.log("suppression confirmée");
-      this.topic.companies.splice(0,1);
+      
+      this.topicsService.deleteCompanyFromTopic(id,this.topic._id).then(
+        (res)=>{console.log("suppression confirmée");this.topic.companies.splice(companyIndex,1);
+        }
+      ).catch((err)=>{console.log(err)})
+    }
+  }
+
+  removeTicketFromCompany(CompanyIndex,ticketIndex,company:String,id:string){
+    if(confirm("Etes-vous sur de supprimer cet element ? ")) {
+      
+      this.topicsService.deleteTicket(this.topic._id,company,id).then(
+        (res)=>{console.log("supprission confirmée");this.topic.companies[CompanyIndex].tickets.splice(ticketIndex,1);
+        }
+      ).catch((err)=>{console.log(err);window.location.reload()})
+    
     }
     
   }
-
-  removeTicketFromCompany(id:string){
-    if(confirm("Etes-vous sur de supprimer cet element ? ")) {
-      console.log("suppression confirmée");
-    this.topic.companies[1].tickets.splice(0,1);}
-  }
   
-  addTicket(){
+  addTicket(companyId:String,index:number){
     const dialogRef = this.dialog.open(AddTicketComponent,{
+      data :{'TopicId':this.topic._id,"companyId":companyId},
       width:'500px'
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.topic.companies[0].tickets.push(result);
-      this.topicsService.subject.next(this.topic);
+       this.topic.companies[index].tickets.push(result);
+       window.location.reload();
+       this.topicsService.subject.next(this.topic);
     });
   }
+
+
   }
 
 

@@ -11,6 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { AddTopicComponent } from './pages/topics/add-topic/add-topic.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ReactiveFormsModule } from '@angular/forms'
+import { LoginComponent } from './pages/login/login.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatCardModule } from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AuthInterceptorService } from './core/interceptors/auth-interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -19,16 +27,25 @@ import { MatNativeDateModule } from '@angular/material/core';
     NavbarComponent,
     FooterComponent,
     MainComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    MatNativeDateModule
-
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatCheckboxModule,
+    ToastrModule.forRoot()
+    
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,17 +14,17 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatIconModule} from '@angular/material/icon';
-import { ResultatsComponent } from './resultats/resultats.component';
 import { RecommandationComponent } from './recommandation/recommandation.component';
 import { DetailsEntreprisesComponent } from './details-entreprises/details-entreprises.component';
 import { AffectTopicDialogComponent } from './affect-topic-dialog/affect-topic-dialog.component';
 import {  MatDialogModule } from '@angular/material/dialog';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     EntreprisesComponent,
     RechercheComponent,
-    ResultatsComponent,
     RecommandationComponent,
     DetailsEntreprisesComponent,
     AffectTopicDialogComponent,
@@ -41,7 +41,9 @@ import {  MatDialogModule } from '@angular/material/dialog';
     MatChipsModule,
     MatAutocompleteModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule
 ]
 })
 export class EntreprisesModule { }

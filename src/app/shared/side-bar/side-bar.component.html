@@ -42,10 +42,19 @@
         </li>
         
         <li class="nav-item">
-          <a [routerLink]="'compagnes'" routerLinkActive="active" class="nav-link">
+          <a [routerLink]="'campagnes'" routerLinkActive="active" class="nav-link">
             <i class="nav-icon fas fa-briefcase"></i>
             <p>
-              Compagnes
+              campagnes
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="role=='admin'">
+          <a [routerLink]="'utilisateurs'" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              utilisateurs
             </p>
           </a>
         </li>

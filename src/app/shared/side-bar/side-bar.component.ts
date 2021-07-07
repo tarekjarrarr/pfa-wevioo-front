@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 /* import { AuthenticationService } from '../../core/authentication/authentication.service';
 import { Role } from '../../core/enums/role.enum'; */
 
@@ -40,16 +41,16 @@ export class SideBarComponent implements OnInit {
   ];
   
 
- // constructor(private authenticationService: AuthenticationService) { }
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
 
+  
   ngOnInit(): void {
     // tslint:disable-next-line:no-console
-    //console.log(this.authenticationService.role);
+    console.log(this.authenticationService.role);
   }
 
-  /* get role(): Role {
+  get role(){
     return this.authenticationService.role;
-  } */
+  }
 
 }

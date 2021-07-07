@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChartsModule } from 'ng2-charts';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -12,7 +13,9 @@ import { DashboardComponent } from './dashboard.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    ChartsModule
+    ChartsModule,
+    MatProgressSpinnerModule
+
   ]
 })
 export class DashboardModule { }

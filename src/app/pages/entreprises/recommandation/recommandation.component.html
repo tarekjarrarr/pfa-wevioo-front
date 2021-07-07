@@ -33,8 +33,38 @@
                         <div class="col col-sm-5 align-items-center">
                             <mat-form-field class="form-group" appearance="outline">
                                 <mat-label>Nom de l'entreprise</mat-label>
-                                <input matInput placeholder="Ex:Wevioo" formControlName="company">
+                                <input matInput placeholder="Ex:Wevioo" formControlName="company" type="text" list="companies">
+                                <datalist id="companies">
+                                    <option *ngFor="let company of companies" [value]='company'>{{company}}</option>
+                                </datalist>
                               </mat-form-field>
+                              <!-- <mat-form-field class="form-group" appearance="outline">
+                                <mat-label>Nom de l'entreprise</mat-label>
+                                <mat-select formControlName="company">
+                                    
+                                </mat-select>
+                            </mat-form-field> -->
+                        </div>
+                    </div>
+                    <div class="row " style="margin-left:10px;margin-right:20px" *ngIf="companyDetails">
+                        <div class="col col-sm-5" style="width:fit-content;">
+                            <mat-form-field class="form-group" appearance="outline">
+                                <mat-label>Secteur d'activité</mat-label>
+                                <input matInput type="text" name="industry" #todo placeholder="secteur d'activité" [value]="companyDetails.industry">
+                            </mat-form-field>
+                        </div>
+                        <div class="col col-sm-4">
+                            <mat-form-field class="form-group" appearance="outline">
+                                <mat-label>Type de l'entreprise</mat-label>
+                                <input matInput type="text" name="type" #todo placeholder="type" [value]="companyDetails.type">
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col col-sm-3">
+                            <mat-form-field class="form-group" appearance="outline">
+                                <mat-label>Taille de l'entreprise</mat-label>
+                                <input matInput type="text" name="size" #todo placeholder="taille" [value]="companyDetails.company_size">
+                            </mat-form-field>
                         </div>
                     </div>
                         
@@ -46,35 +76,12 @@
                             </h3>
 
                             <div  class="row " *ngIf="clicked">
-                                <div class="col col-sm-4">
-                                    <mat-form-field class="form-group" appearance="outline">
-                                        <mat-label>Type de l'entreprise</mat-label>
-                                        <mat-select formControlName="type">
-                                            <mat-option value="startup">startup</mat-option>
-                                            <mat-option value="PME">PME</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-        
-                                </div>
-                                <div class="col col-sm-4">
-                                    <mat-form-field class="form-group" appearance="outline">
-                                        <mat-label>Taille de l'entreprise</mat-label>
-                                        <mat-select formControlName="size">
-                                            <mat-option value="0-10">0 - 10</mat-option>
-                                            <mat-option value="11-50">11 - 50</mat-option>
-                                            <mat-option value="50-100">50 - 100</mat-option>
-                                            <mat-option value=">100">> 100</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col col-sm-4">
+                                <div class="col col-sm-6">
                                     <mat-form-field class="form-group" appearance="outline">
                                         <mat-label>Lieu</mat-label>
                                         <input matInput placeholder="Ex:Tunis" formControlName="location">
                                       </mat-form-field>
                                 </div>
-                            </div>   
-                            <div class="row" >
                                 <div class="col col-sm-6">
                                     <mat-form-field *ngIf="clicked" class="form-group" appearance="outline" style="width:400px" >
                                         <mat-chip-list #chipList>
@@ -83,7 +90,7 @@
                                                 {{key}}
                                                 <mat-icon matChipRemove >cancel</mat-icon>
                                             </mat-chip>
-                                            <input placeholder="insérer un mot clé" #keyInput formControlName="keysCtrl"
+                                            <input placeholder="insérer un mot clé" #keyInput formControlName="specialties"
                                                 [matAutocomplete]="auto" [matChipInputFor]="chipList"
                                                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                                 [matChipInputAddOnBlur]="false" 
@@ -103,7 +110,7 @@
                     </div>
                     <div class="row ">
                         <div class="col col-sm-2 offset-md-8">
-                            <button type="" [disabled]="!formRecommandation .touched" (click)="Clear()" class="btn bg-light" >reinitialiser</button>
+                            <button type="" [disabled]="!formRecommandation .touched" (click)="Clear()" class="btn bg-light" style="border-color:#F7B000" >reinitialiser</button>
                         </div>
                         <div class="col col-sm-2">
                             <button type="submit" [disabled]="!formRecommandation.valid" class="btn" style="background-color:#F7B000">rechercher</button>
@@ -114,7 +121,81 @@
             </div>
 
         </div>
-        <app-resultats *ngIf="result"></app-resultats>
-        
+        <div class="loading-overlay offset-5" *ngIf="loading">
+            <mat-progress-spinner mode="indeterminate" style="position: relative"></mat-progress-spinner>
+        </div>
+        <div *ngIf="result">
+            <div class="text-center">
+                <h1 style="color: #00A3AA;font-weight: bold;">Resultat de la recommendation</h1>
+            </div>
+            <!-- <div class="text-center">
+              <a class="btn btn-app bg-success">
+                <i class="fas fa-building"></i>  <b>{{searchResult.number}}</b> Entreprises trouvées
+              </a>
+            </div> -->
+                <!-- Default box -->
+                <div class="card card-solid">
+                <div class="card-body pb-0" >
+                    
+                    <div class="row" *ngIf="!loading">
+                    <div class="col col-12 col-sm-6 col-md-4  d-flex align-items-stretch flex-column" *ngFor="let company of recommendationResult">
+                        <div class="card bg-light d-flex flex-fill">
+                        <div class="card-header text-muted border-bottom-0">
+                                {{company['overview.industry']}}
+                            
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="row" style="padding-top: 25px;">
+                                <div class="col-8" >
+                                    <h2 class="lead text-center" id="child"><b>{{company['overview.name']}}</b></h2>
+                                </div>
+                                <div class="col-4 text-center" >
+                                    
+                                    <img *ngIf="!company['overview.image']" src="../../../../assets/images/placeholder.png" alt="logo" class="img-circle img-fluid">
+
+                                    <img *ngIf="company['overview.image']" src="{{company['overview.image']}}" alt="logo" class="img-circle img-fluid">
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 100px;">
+                                <div class="col">
+                                    <p class="text-muted text-sm"><b>description</b> {{company['overview.description'] | slice:0:300}} </p>
+                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Addresse: {{company['overview.location']}}</li>
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-laptop-code"></i></span> Website : {{company['overview.website']}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                               <div class=" col text-left">
+                                  <span class="badge badge-pill badge-success">{{company.score}}</span>
+                                </div>
+                                <div class="col text-right">
+                                    <a  class="btn btn-sm btn-primary" (click)="goDetailsCompany(company['overview.name'])">
+                                    <i class="fas fa-info"></i> Consulter Details
+                                    </a>
+                                </div> 
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <!-- <mat-paginator [length]="length"
+                        [pageSize]="pageSize"
+                        [pageSizeOptions]="pageSizeOptions"
+                        (page)="pageEvent = handlePageEvent($event)">
+                    </mat-paginator> -->
+                </div>
+                <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+                </div>             
+    
     </div>
 </section>

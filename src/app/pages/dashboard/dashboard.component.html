@@ -30,7 +30,7 @@
       <div class="col-lg-3 col-6">
         <div class="small-box bg-gradient-info text-light">
           <div class="inner">
-            <h3>43</h3>
+            <h3>{{userStats}}</h3>
             <p>utilisateurs actifs</p>
           </div>
           <div class="icon">
@@ -80,10 +80,10 @@
         <div class="small-box bg-gradient-danger text-light">
           <div class="inner">
             <h3>63</h3>
-            <p>recherches effectuées</p>
+            <p>campagnes crées</p>
           </div>
           <div class="icon">
-            <i class="fas fa-search"></i>
+            <i class="fas fa-briefcase"></i>
           </div>
           <a href="#" class="small-box-footer">
             More info <i class="fas fa-arrow-circle-right"></i>
@@ -93,20 +93,22 @@
     </div>
 
     <div class="row mx-auto justify-content" style="margin-top:20px">
-
       <div class="col-md-6 col-sm-6 ">
+        <div class="loading-overlay" *ngIf="loading">
+          <mat-progress-spinner mode="indeterminate" style="position: relative"></mat-progress-spinner>
+        </div>
         <!-- Widget: user widget style 2 -->
-        <div class="card card-widget widget-user-2" style="height: 95%">
+        <div class="card card-widget widget-user-2" style="height: 95%" *ngIf="!loading">
           <!-- Add the bg color to the header using any of the bg-* classes -->
           <div class="widget-user-header bg-gradient-dark">
             <div class="widget-user-image">
               <img class="img-circle elevation-2" src="../../../assets/images/default-profile.png" alt="User Avatar">
             </div>
             <!-- /.widget-user-image -->
-            <h3 class="widget-user-username">Nadia Sbaa</h3>
-            <h5 class="widget-user-desc">Business developer</h5>
+            <h3 class="widget-user-username">{{currentUser.fullname}}</h3>
+            <h5 class="widget-user-desc">{{currentUser.position}}</h5>
           </div>
-          <div class="card-footer ">
+          <div class="card-footer " >
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a  class="nav-link">
@@ -115,7 +117,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link">
-                  Nombre de compagnes suivies <span class="float-right badge bg-info">5</span>
+                  Nombre de campagnes suivies <span class="float-right badge bg-info">5</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -198,7 +200,7 @@
     
                   <button class="btn btn-sm" type="button" (click)="goTopics()">
                     <div class="info-box-content ">
-                      <span class="info-box-text  ">Gérer vos <br>compagnes </span>
+                      <span class="info-box-text  ">Gérer vos <br>campagnes </span>
                     </div>
                     </button>
                 </div>

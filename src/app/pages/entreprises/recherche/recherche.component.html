@@ -21,32 +21,36 @@
 </section>
 <section class="content">   
     <div class="container-fluid">
-
-
         <div class="card card-warning">
             <div class="card-header">
             </div>
             <div class="card-body">
 
-                <form [formGroup]="formResearch" (ngSubmit)="onSubmit()">
-                    <div class="row " style="margin-left:10px;margin-right:20px">
+                <form [formGroup]="formResearch" >
+                    <div class="row " style="margin-left:10px;margin-right:20px" >
+                        <mat-form-field class="form-group" appearance="outline">
+                            <mat-label>Nom de l'entreprise</mat-label>
+                            <input matInput placeholder="Ex:Wevioo" formControlName="name" type="text" list="companies" [disabled]="!nameSelected"  (click)="nameClicked()" checked>
+                            <datalist id="companies">
+                                <option *ngFor="let company of companies" [value]='company'>{{company}}</option>
+                            </datalist>
+                          </mat-form-field>
+                    </div>
+                    <div class="row " style="margin-left:10px;margin-right:20px" >
                         <div class="col col-sm-5">
-                            <mat-form-field class="form-group" appearance="outline">
+                            <mat-form-field class="form-group" appearance="outline" >
                                 <mat-label>Secteur d'activité</mat-label>
-                                <mat-select formControlName="industry">
-                                    <mat-option value="intellignece artificielle">intellignece artificielle</mat-option>
-                                    <mat-option value="services informatiques">services informatiques</mat-option>
-                                    <mat-option value="industries">industries</mat-option>
-                                    <mat-option value="reseau et telecommunication">reseau et telecommunication</mat-option>
+                                <mat-select formControlName="industry" (click)="filtersClicked()" [disabled]="!filtersSelected" >
+                                    <mat-option [value]='industry' *ngFor="let industry of industries">{{industry}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
                         <div class="col col-sm-4">
                             <mat-form-field class="form-group" appearance="outline">
                                 <mat-label>Type de l'entreprise</mat-label>
-                                <mat-select formControlName="type">
-                                    <mat-option value="startup">startup</mat-option>
-                                    <mat-option value="PME">PME</mat-option>
+                                <mat-select formControlName="type" (click)="filtersClicked()" [disabled]="!filtersSelected">
+                                    <mat-option *ngFor="let type of types" [value]='type'>{{type}}</mat-option>
+                                    
                                 </mat-select>
                             </mat-form-field>
 
@@ -54,17 +58,14 @@
                         <div class="col col-sm-3">
                             <mat-form-field class="form-group" appearance="outline">
                                 <mat-label>Taille de l'entreprise</mat-label>
-                                <mat-select formControlName="size">
-                                    <mat-option value="0-10">0 - 10</mat-option>
-                                    <mat-option value="11-50">11 - 50</mat-option>
-                                    <mat-option value="50-100">50 - 100</mat-option>
-                                    <mat-option value=">100">> 100</mat-option>
+                                <mat-select formControlName="size" (click)="filtersClicked()" [disabled]="!filtersSelected">
+                                    <mat-option *ngFor="let size of sizes" [value]='size'>{{size}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
                         <div class="col col-sm-4">
                             <mat-form-field class="form-group" appearance="outline">
-                                <input matInput placeholder="Ex:Tunis" formControlName="location">
+                                <input matInput placeholder="Ex:Tunis" formControlName="location" (click)="filtersClicked()" [disabled]="!filtersSelected">
                               </mat-form-field>
                         </div>
                     </div>
@@ -74,18 +75,18 @@
                             <i *ngIf="!clicked" class="right fas fa-angle-right" (click)="this.clicked=!clicked"></i>
                             <i *ngIf="clicked" class="right fas fa-angle-down" (click)="this.clicked=!clicked"></i>
                             </h3>
-                            <mat-form-field *ngIf="clicked" class="form-group" appearance="outline" style="width:400px" >
+                            <mat-form-field *ngIf="clicked" class="form-group" appearance="outline" style="width:630px" >
                                 <mat-chip-list #chipList>
                                     <mat-chip *ngFor="let key of keys" [selectable]="false" 
                                         removable="true" (removed)="remove(key)">
                                         {{key}}
                                         <mat-icon matChipRemove >cancel</mat-icon>
                                     </mat-chip>
-                                    <input placeholder="insérer un mot clé" #keyInput formControlName="keysCtrl"
+                                    <input placeholder="insérer un mot clé" #keyInput formControlName="specialties"
                                         [matAutocomplete]="auto" [matChipInputFor]="chipList"
                                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                         [matChipInputAddOnBlur]="false" 
-                                        (matChipInputTokenEnd)="add($event)"/>
+                                        (matChipInputTokenEnd)="add($event)" (click)="filtersClicked()"/>
                                 </mat-chip-list>
                                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                                     <mat-option *ngFor="let key of filteredKeys | async" [value]="key">
@@ -97,10 +98,10 @@
                     </div>
                     <div class="row ">
                         <div class="col col-sm-2 offset-md-8">
-                            <button type="" [disabled]="!formResearch .touched" (click)="Clear()" class="btn bg-light" >reinitialiser</button>
+                            <button type="button" [disabled]="!formResearch.touched" (click)="Clear()" class="btn bg-light"  style="border-color:#F7B000" >reinitialiser</button>
                         </div>
                         <div class="col col-sm-2">
-                            <button type="submit" [disabled]="!formResearch.valid" class="btn" style="background-color:#F7B000">rechercher</button>
+                            <button type="submit" [disabled]="!formResearch.dirty" class="btn" (click)="onSubmit()" style="background-color:#F7B000" >rechercher</button>
                         </div>
                        
                     </div>
@@ -108,7 +109,130 @@
             </div>
 
         </div>
-        <app-resultats *ngIf="result"></app-resultats>
-        
+        <div *ngIf="result && searchByNameResult">
+            <div class="text-center">
+                <h1 style="color: #00A3AA;font-weight: bold;" #scroll>Resultat de la recherche</h1>
+            </div>
+            
+                <!-- Default box -->
+                <div class="card card-solid">
+                <div class="card-body pb-0" >
+                    <div class="loading-overlay" *ngIf="loading">
+                    <mat-progress-spinner mode="indeterminate" style="position: relative"></mat-progress-spinner>
+                    </div>
+                    <div class="row justify-content-around" *ngIf="!loading">
+                    <div class="col col-12 col-sm-6 col-md-6   d-flex align-items-stretch flex-column">
+                        <div class="card bg-light d-flex flex-fill">
+                        <div class="card-header text-muted border-bottom-0">
+                            {{searchByNameResult.industry}}
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="row" style="padding-top: 25px;">
+                                <div class="col-8" >
+                                    <h2 class="lead text-center" id="child"><b>{{searchByNameResult.name}}</b></h2>
+                                </div>
+                                <div class="col-4 text-center" >
+                                    <img *ngIf="!searchByNameResult.image" src="../../../../assets/images/placeholder.png" alt="logo" class="img-circle img-fluid">
+                                    <img *ngIf="searchByNameResult.image" src={{searchByNameResult.image}} alt="logo" class="img-circle img-fluid">
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 100px;">
+                                <div class="col">
+                                    <p class="text-muted text-sm"><b>description</b> {{searchByNameResult.description| slice:0:300}} </p>
+                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Addresse: {{searchByNameResult.location}}</li>
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-laptop-code"></i></span> Website : {{searchByNameResult.website}}</li>
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-right">
+                            <a  class="btn btn-sm btn-primary" (click)="goDetailsCompany(searchByNameResult._id)">
+                                <i class="fas fa-info"></i> Consulter Details
+                            </a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                </div>
+                <!-- /.card -->    
+         </div>          
+         <div class="loading-overlay offset-5" *ngIf="loading">
+            <mat-progress-spinner mode="indeterminate" style="position: relative"></mat-progress-spinner>
+        </div>
+         <div *ngIf="result && searchResult">
+            <div class="text-center">
+                <h1 style="color: #00A3AA;font-weight: bold;">Resultat de la recherche</h1>
+            </div>
+            <div class="text-center">
+              <a class="btn btn-app bg-success">
+                <i class="fas fa-building"></i>  <b>{{searchResult.number}}</b> Entreprises trouvées
+              </a>
+            </div>
+                <!-- Default box -->
+                <div class="card card-solid">
+                <div class="card-body pb-0" >
+                    
+                    <div class="row" *ngIf="!loading">
+                    <div class="col col-12 col-sm-6 col-md-4  d-flex align-items-stretch flex-column" *ngFor="let company of searchResult.results; trackBy: trackByFn">
+                        <div class="card bg-light d-flex flex-fill">
+                        <div class="card-header text-muted border-bottom-0">
+                            {{company.industry}}
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="row" style="padding-top: 25px;">
+                                <div class="col-8" >
+                                    <h2 class="lead text-center" id="child"><b>{{company.name}}</b></h2>
+                                </div>
+                                <div class="col-4 text-center" >
+                                    
+                                    <img *ngIf="!company.image" src="../../../../assets/images/placeholder.png" alt="logo" class="img-circle img-fluid">
+
+                                    <img *ngIf="company.image" src={{company.image}} alt="logo" class="img-circle img-fluid">
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 100px;">
+                                <div class="col">
+                                    <p class="text-muted text-sm"><b>description</b> {{company.description | slice:0:300}} </p>
+                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Addresse: {{company.location}}</li>
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-laptop-code"></i></span> Website : {{company.website}}</li>
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-right">
+                            <a  class="btn btn-sm btn-primary" (click)="goDetailsCompany(company._id)">
+                                <i class="fas fa-info"></i> Consulter Details
+                            </a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <mat-paginator [length]="length"
+                        [pageSize]="pageSize"
+                        [pageSizeOptions]="pageSizeOptions"
+                        (page)="pageEvent = handlePageEvent($event)">
+                    </mat-paginator>
+                </div>
+                <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->    
+         </div>          
     </div>
 </section>

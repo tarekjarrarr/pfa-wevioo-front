@@ -1,0 +1,10 @@
+#parent {position: relative;}
+
+#child {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    height: 30%;
+    width: 100%;
+    margin: -15% -30% 0 -25%;
+}

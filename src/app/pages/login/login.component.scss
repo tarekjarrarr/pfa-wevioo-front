@@ -1,0 +1,104 @@
+.login-container{
+  background-image: url('../../../assets/images/bg.jpeg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  display: table;
+  position: absolute;
+
+  .container{
+    display: table-cell;
+    vertical-align: middle;
+    padding: 100px;
+  }
+
+  .logo-img{
+    width: 270px;
+    margin-bottom: 20px;
+  }
+
+  .text-container{
+    margin: 20px 0;
+  }
+}
+
+.text-title-white {
+  font-weight: 700;
+  font-size: 20px;
+  color: white;
+}
+
+.text-large-white {
+  font-weight: 400;
+  font-size: 16px;
+  color: white;
+}
+
+.text-normal {
+  font-weight: 400;
+  font-size: 14px;
+  color: #202420;
+}
+
+.error {
+  color: #FF5B65;
+}
+
+.input-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #808B9E;
+  margin: 5px 0;
+  padding: 0;
+}
+
+.inner-add-on {
+  position: relative;
+}
+
+.inner-add-on > i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-55%);
+}
+
+.left-add-on > i {
+  left: 8px;
+}
+
+.left-add-on > input {
+  padding-left: 30px !important;
+}
+
+.right-add-on > i {
+  right: 8px;
+}
+
+.right-add-on > input {
+  padding-right: 20px !important;
+}
+
+.btn-link,
+.btn-link:hover,
+.btn-link:link,
+.btn-link:visited,
+.btn-link:active {
+  font-size: 12px;
+  font-weight: 500;
+  color: #003153;
+  text-decoration: none;
+}
+
+.logo{
+   height:100px ;
+   width:100px;
+   margin-left: auto;
+   margin-right: auto;display: block;
+}
+
+.login{
+  width: 500px;
+  opacity: 0.95;
+}

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CompaniesResolver } from 'src/app/core/resolvers/companies.resolver';
 import { DetailsEntreprisesComponent } from './details-entreprises/details-entreprises.component';
 import { EntreprisesComponent } from './entreprises.component';
 import { RechercheComponent } from './recherche/recherche.component';
@@ -12,8 +13,8 @@ const routes: Routes = [
     pathMatch: 'full'  
   },
   {path:'recherche',component: RechercheComponent},
-  {path:'recommandation',component:RecommandationComponent},
-  {path:'details',component:DetailsEntreprisesComponent}
+  {path:'recommandation',component:RecommandationComponent,resolve: {companiesList:CompaniesResolver}},
+  {path:'details/:id',component:DetailsEntreprisesComponent}
 
   
 ];

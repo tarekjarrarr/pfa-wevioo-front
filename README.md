@@ -1,21 +1,20 @@
-# W-Selling Backend
+# W-Selling Frontend
 
 W-selling is a solution aiming to make commercials work inside a company easier by providing them with recommendation tools which will help them find clients that match their preferences and goals.
 It also offers the possibility of tracking clients and organising commercial campaigns.
 ## Technologies
 
 Project is created with:
-* Nodejs version: 14.16.1
+
 * Angular version: 11.2.14
-* Express version: 4.17.1
-* mongoose version: 5.12.10
+
 
 
 ## Running the Application
 
 ```
 1. Run `npm install`
-2. Run `node index.js`
+2. Run `ng serve`
 ```
 ## Functionnalities
 
